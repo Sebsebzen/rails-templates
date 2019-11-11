@@ -48,11 +48,6 @@ YAML
 
 # Assets
 ########################################
-run 'rm -rf app/assets/stylesheets'
-run 'rm -rf vendor'
-run 'curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip'
-run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
-
 run 'rm app/assets/javascripts/application.js'
 file 'app/assets/javascripts/application.js', <<-JS
 //= require rails-ujs
@@ -88,6 +83,12 @@ file 'app/views/layouts/application.html.erb', <<-HTML
 </html>
 HTML
 
+file 'app/views/shared/_navbar.html.erb', <<-HTML
+<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand" href="#">Fixed top</a>
+</nav>
+HTML
+
 file 'app/views/shared/_flashes.html.erb', <<-HTML
 <% if notice %>
   <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
@@ -106,9 +107,6 @@ file 'app/views/shared/_flashes.html.erb', <<-HTML
   </div>
 <% end %>
 HTML
-
-run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
-run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/logo.png > app/assets/images/logo.png'
 
 # README
 ########################################
