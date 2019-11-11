@@ -14,6 +14,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '#{Rails.version}'
 gem 'redis'
+gem 'material-sass', '4.1.1'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
@@ -52,6 +53,13 @@ run 'rm app/assets/javascripts/application.js'
 file 'app/assets/javascripts/application.js', <<-JS
 //= require rails-ujs
 //= require_tree .
+//= require material
+JS
+
+run 'rm app/assets/stylesheets/application.scss'
+file 'app/assets/stylesheets/application.scss', <<-JS
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "material";
 JS
 
 # Dev environment
