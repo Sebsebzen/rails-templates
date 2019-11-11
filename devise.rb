@@ -56,6 +56,7 @@ file 'app/assets/javascripts/application.js', <<-JS
 //= require material
 JS
 
+run 'rm app/assets/stylesheets/application.css'
 run 'rm app/assets/stylesheets/application.scss'
 file 'app/assets/stylesheets/application.scss', <<-JS
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
