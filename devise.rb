@@ -14,7 +14,6 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '#{Rails.version}'
 gem 'redis'
-gem 'material-sass', '4.1.1'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
@@ -53,14 +52,6 @@ run 'rm app/assets/javascripts/application.js'
 file 'app/assets/javascripts/application.js', <<-JS
 //= require rails-ujs
 //= require_tree .
-//= require material
-JS
-
-run 'rm app/assets/stylesheets/application.css'
-run 'rm app/assets/stylesheets/application.scss'
-file 'app/assets/stylesheets/application.scss', <<-JS
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
-@import "material";
 JS
 
 # Dev environment
@@ -92,12 +83,6 @@ file 'app/views/layouts/application.html.erb', <<-HTML
 </html>
 HTML
 
-file 'app/views/shared/_navbar.html.erb', <<-HTML
-<nav class="navbar fixed-top navbar-light bg-light">
-  <a class="navbar-brand" href="#">Fixed top</a>
-</nav>
-HTML
-
 file 'app/views/shared/_flashes.html.erb', <<-HTML
 <% if notice %>
   <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
@@ -116,6 +101,9 @@ file 'app/views/shared/_flashes.html.erb', <<-HTML
   </div>
 <% end %>
 HTML
+
+run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
+run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/logo.png > app/assets/images/logo.png'
 
 # README
 ########################################
@@ -172,8 +160,7 @@ TXT
   run 'rm app/controllers/application_controller.rb'
   file 'app/controllers/application_controller.rb', <<-RUBY
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  before_action :authenticate_user!
+#{"  protect_from_forgery with: :exception\n" if Rails.version < "5.2"}  before_action :authenticate_user!
 end
 RUBY
 
